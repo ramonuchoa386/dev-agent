@@ -1,0 +1,66 @@
+{
+  "id": null,
+  "title": "GitHub Agent Dashboard",
+  "tags": [
+    "github",
+    "automation"
+  ],
+  "timezone": "browser",
+  "panels": [
+    {
+      "title": "Webhook Requests",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "rate(github_webhook_requests_total[5m])",
+          "legendFormat": "{{action}} - {{repository}}"
+        }
+      ]
+    },
+    {
+      "title": "Active Workflows",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "active_workflows",
+          "legendFormat": "Active"
+        }
+      ]
+    },
+    {
+      "title": "Pull Requests Created",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "pull_requests_created_total",
+          "legendFormat": "{{repository}}"
+        }
+      ]
+    },
+    {
+      "title": "Workflow Duration",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "workflow_duration_seconds",
+          "legendFormat": "{{step}} - {{status}}"
+        }
+      ]
+    },
+    {
+      "title": "Error Rate",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "rate(errors_total[5m])",
+          "legendFormat": "{{error_type}} - {{agent}}"
+        }
+      ]
+    }
+  ],
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "refresh": "5s"
+}

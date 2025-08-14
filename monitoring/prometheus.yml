@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'github-agent'
+    static_configs:
+      - targets: ['github-agent:8001']
+    scrape_interval: 5s
+    metrics_path: /metrics
+
+  - job_name: 'ollama'
+    static_configs:
+      - targets: ['ollama:11434']
+    scrape_interval: 30s
+    metrics_path: /api/tags
