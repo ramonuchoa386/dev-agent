@@ -25,6 +25,27 @@ class GitHubService:
         
         return pr.html_url
     
+    # async def update_file(
+    #     self,
+    #     file_path: str,
+    #     commit_message: str,
+    #     file_content: str,
+    #     file_prev_sha: str,
+    #     branch: str
+    # ) -> str:
+    #     """Cria pull request"""
+    #     repo = self.github.get_repo()
+        
+    #     pr = repo.update_file(
+    #         path=file_path,
+    #         message=commit_message,
+    #         content=file_content,
+    #         sha=file_prev_sha,
+    #         branch=branch
+    #     )
+        
+    #     return pr.html_url
+    
     async def get_public_repos(self):
         """Resgatar lista de repositórios no Github"""
         public_repos = self.github.get_user().get_repos()
