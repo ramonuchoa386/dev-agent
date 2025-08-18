@@ -31,37 +31,51 @@ Determine:
 1. Qual arquivo deve ser modificado
 2. Que tipo de alteração deve ser feita
 3. Branch prefix a ser usado
+4. **Responda apenas com o schema de resposta sem incluir outras informações**
 
-Responda em formato JSON:
+Schema de resposta:
+
+{{
+    "target_file": string | null,
+    "change_type": string | null,
+    "branch_prefix": string | null
+}}
+
+Exemplo de resposta para análise com sucesso:
+
 {{
     "target_file": "caminho/do/arquivo",
     "change_type": "tipo de alteração",
     "branch_prefix": "prefixo-branch"
-}}"""
+}}
 
-            print('-------------------------')
-            print('REPO ANALIZER PROMPT: ', analysis_prompt)
-            print('-------------------------')
+Exemplo de resposta para análise sem sucesso:
+
+{{
+    "target_file": null,
+    "change_type": null,
+    "branch_prefix": null
+}}"""
             
             response = await self.gemini_llm.ainvoke(analysis_prompt)
             
             try:
-                file_info = json.loads(response.content)
-                print('-------------------------')
-                print('FILE INFO: ', file_info)
-                print('-------------------------')
+                content = response.content.strip()
+        
+                if content.startswith('```'):
+                    start_idx = content.find('{')
+                    end_idx = content.rfind('}')
+                    
+                    if start_idx != -1 and end_idx != -1:
+                        content = content[start_idx:end_idx + 1]
+                
+                file_info = json.loads(content)
 
                 state.file_info = file_info
-                print('-------------------------')
-                print('STATE: ', state)
-                print('-------------------------')
 
                 state.step = "repository_analyzed"
-                print('-------------------------')
-                print('STATE: ', state)
-                print('-------------------------')
-            except json.JSONDecodeError:
-                state.error = "Failed to parse repository analysis"
+            except json.JSONDecodeError as j:
+                state.error = f"Failed to parse repository analysis: {str(j)}"
             
         except Exception as e:
             state.error = f"Error analyzing repository: {str(e)}"
