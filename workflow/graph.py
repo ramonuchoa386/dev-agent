@@ -30,7 +30,7 @@ def create_workflow():
     workflow.add_node("modify_code", CodeModifierAgent().execute)
     workflow.add_node("create_pr", PRCreatorAgent().execute)
     
-    workflow.set_entry_point("analyze_repository")
+    workflow.set_entry_point("process_webhook")
     
     workflow.add_conditional_edges(
         "process_webhook",
