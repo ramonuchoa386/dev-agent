@@ -19,7 +19,7 @@ class WebhookProcessorAgent(BaseAgent):
                 state.repo_info = {
                     "name": payload.repository["name"],
                     "full_name": payload.repository["full_name"],
-                    "clone_url": payload.repository["clone_url"],
+                    "clone_url": payload.repository["ssh_url"],
                     "default_branch": payload.repository["default_branch"]
                 }
                 
