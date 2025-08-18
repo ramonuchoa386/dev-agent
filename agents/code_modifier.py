@@ -23,7 +23,7 @@ class CodeModifierAgent(BaseAgent):
                 repo_info["name"]
             )
             
-            branch_name = f"{file_info['branch_prefix']}-{state.webhook_payload.project_card['id']}"
+            branch_name = f"{file_info['branch_prefix']}-bug-{state.webhook_payload.label['id']}"
             await self.git_service.create_branch(repo_path, branch_name)
             state.branch_name = branch_name
             
@@ -34,7 +34,7 @@ class CodeModifierAgent(BaseAgent):
             modification_prompt = f"""Você é um assistente de código especializado. Modifique o seguinte código:
 Arquivo: {file_info["target_file"]}
 Tipo de alteração: {file_info["change_type"]}
-Contexto do card: {state.webhook_payload.project_card.get('note', '')}
+Contexto do card: {state.webhook_payload.issue.get('title', '')}
 
 Código atual:
 ```
@@ -43,11 +43,12 @@ Código atual:
 
 Retorne apenas o código modificado, sem explicações adicionais."""
             
-            modified_code = await self.local_llm.ainvoke(modification_prompt)
-            state.code_changes = modified_code
+            modified_code = await self.gemini_llm.ainvoke(modification_prompt)
+            
+            state.code_changes = modified_code.content
             
             with open(file_path, 'w') as f:
-                f.write(modified_code)
+                f.write(modified_code.content.replace('```typescript\n', '').replace('```', ''))
             
             await self.git_service.commit_changes(
                 repo_path,
