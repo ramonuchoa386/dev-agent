@@ -12,7 +12,7 @@ class GitHubWebhookPayload(BaseModel):
 class AgentState(BaseModel):
     webhook_payload: Optional[GitHubWebhookPayload] = None
     repo_info: Optional[Dict[str, Any]] = None
-    file_info: Optional[Dict[str, str]] = None
+    file_info: Optional[Dict[str, Optional[str]]] = None
     repository_context: Optional[str] = None
     code_changes: Optional[str] = None
     branch_name: Optional[str] = None
