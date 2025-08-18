@@ -31,7 +31,7 @@ async def ingest_repository_markdowns(rag_service: RAGService, repo_name: str, d
                     await rag_service.add_document(
                         collection='codebase',
                         repo_name=repo_name,
-                        file_path=file_path_relative,
+                        file_path=file_path_relative.rstrip(".md"),
                         code_content=combined_code
                     )
                 
