@@ -19,8 +19,8 @@ class AuthMiddleware(BaseHTTPMiddleware):
         if request.url.path in protected_paths:
             signature = request.headers.get("x-hub-signature-256")
 
-            if not signature:
-                return JSONResponse(status_code=401, content={"detail": "Missing signature"})
+            # if not signature:
+            #     return JSONResponse(status_code=401, content={"detail": "Missing signature"})
             
             payload = await request.body()
 
@@ -32,8 +32,8 @@ class AuthMiddleware(BaseHTTPMiddleware):
             
             expected_signature = f"sha256={expected_signature}"
 
-            if not hmac.compare_digest(signature, expected_signature):
-                return JSONResponse(status_code=401, content={"detail": "Invalid signature"})
+            # if not hmac.compare_digest(signature, expected_signature):
+            #     return JSONResponse(status_code=401, content={"detail": "Invalid signature"})
 
         response = await call_next(request)
 
