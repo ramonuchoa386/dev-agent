@@ -146,46 +146,6 @@ graph TD
     P1 --> MON3[Dashboard: Testes]
     T2 --> MON4[Dashboard: Sucesso]
     ERR7 --> MON5[Dashboard: Erros]
-    
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style H fill:#fff3e0
-    style J2 fill:#fff3e0
-    style P2 fill:#fff3e0
-    style Q1 fill:#fff3e0
-    style F fill:#e8f5e8
-    style K fill:#e8f5e8
-    style M fill:#e8f5e8
-    style J1 fill:#e8f5e8
-    style U fill:#c8e6c9
-    style V fill:#ffcdd2
-    style ERR1 fill:#ffcdd2
-    style ERR2 fill:#ffcdd2
-    style ERR3 fill:#ffcdd2
-    style ERR4 fill:#ffcdd2
-    style ERR_HANDLER fill:#fff3e0
-    style FB3 fill:#e3f2fd
-    style FB4 fill:#e8f5e8
-    style A1 fill:#f3e5f5
-    style M1 fill:#fff8e1
-    
-    classDef agent fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
-    classDef decision fill:#fff3e0,stroke:#ff9800,stroke-width:2px
-    classDef action fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
-    classDef success fill:#c8e6c9,stroke:#4caf50,stroke-width:3px
-    classDef error fill:#ffcdd2,stroke:#f44336,stroke-width:3px
-    classDef security fill:#fff8e1,stroke:#ffc107,stroke-width:2px
-    classDef feedback fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
-    classDef monitor fill:#f1f8e9,stroke:#8bc34a,stroke-width:1px
-    
-    class F,K,M,J1 agent
-    class B,H,J2,P2,Q1,H2,P4,C1,FB2 decision
-    class C,D,N,O,P,R,S,T,T1,A1 action
-    class U success
-    class ERR1,ERR2,ERR3,ERR4,V error
-    class M1,Q security
-    class FB3,FB4,FB5 feedback
-    class MON1,MON2,MON3,MON4,MON5 monitor
 ````
 
 ---
