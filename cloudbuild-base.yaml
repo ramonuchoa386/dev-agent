@@ -1,0 +1,53 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-f",
+        "Dockerfile.base",
+        "-t",
+        us-central1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME-base:latest,
+        ".",
+      ]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-central1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME-base:latest",
+      ]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-f",
+        "Dockerfile",
+        "-t",
+        us-central1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME,
+        ".",
+      ]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-central1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME",
+      ]
+
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+        "deploy",
+        "auto-instalacao-backend",
+        "--image",
+        "us-central1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME",
+        "--region",
+        "southamerica-east1",
+      ]
+
+images:
+  - "us-central1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME-base:latest"
+  - "us-central1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME"
