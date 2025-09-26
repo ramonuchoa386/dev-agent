@@ -2,6 +2,9 @@ from agents.base_agent import BaseAgent
 from models.schemas import AgentState
 from services.rag_service import RAGService
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 class RepositoryAnalyzerAgent(BaseAgent):
     def __init__(self):
@@ -58,6 +61,8 @@ Exemplo de resposta para análise sem sucesso:
 }}"""
             
             response = await self.gemini_llm.ainvoke(analysis_prompt)
+
+            logger.info(f"Repo analyser: {response}")
             
             try:
                 content = response.content.strip()
