@@ -18,6 +18,8 @@ class RepositoryAnalyzerAgent(BaseAgent):
                 state.error = "No webhook payload provided"
                 return state
             
+            logger.info(f"Init repo analysis.")
+
             repo_name = state.webhook_payload.repository["name"]
             bug_desc = state.webhook_payload.issue["body"]
             config_docs = await self.rag_service.similarity_search(collection='codebase', query=bug_desc, repo_name=repo_name)
