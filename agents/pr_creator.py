@@ -19,7 +19,7 @@ class PRCreatorAgent(BaseAgent):
             repo_info = state.repo_info
             
             repo_path = f"./repos/{repo_info['name']}"
-            await self.git_service.push_branch(repo_path, state.branch_name)
+            await self.git_service.push_branch(repo_info['name'], state.branch_name)
             
             pr_title = f"Auto-update: {state.file_info['change_type']}"
             pr_body = f"""This PR was automatically created based on project issue.

@@ -36,8 +36,9 @@ class GitService:
         repo.git.add(A=True)
         repo.index.commit(commit_message)
     
-    async def push_branch(self, repo_path: str, branch_name: str):
+    async def push_branch(self, repo_name: str, branch_name: str):
         """Push da branch"""
-        repo = git.Repo(repo_path)
+        repo = git.Repo(f"./repos/{repo_name}")
         origin = repo.remote(name='origin')
+        origin.set_url(f"https://ramonuchoa386:{os.getenv("GITHUB_TOKEN")}@github.com/ramonuchoa386/{repo_name}.git")
         origin.push(branch_name)
