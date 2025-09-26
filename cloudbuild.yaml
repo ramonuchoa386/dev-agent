@@ -6,7 +6,7 @@ steps:
         "-f",
         "Dockerfile",
         "-t",
-        us-central1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME,
+        "southamerica-east1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME",
         ".",
       ]
 
@@ -14,7 +14,7 @@ steps:
     args:
       [
         "push",
-        "us-central1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME",
+        "southamerica-east1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME",
       ]
 
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
@@ -25,10 +25,10 @@ steps:
         "deploy",
         "auto-instalacao-backend",
         "--image",
-        "us-central1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME",
+        "southamerica-east1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME",
         "--region",
         "southamerica-east1",
       ]
 
 images:
-  - "us-central1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME"
+  - "southamerica-east1-docker.pkg.dev/$PROJECT_ID/smartcode-ai/$REPO_NAME:$BRANCH_NAME"

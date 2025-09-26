@@ -1,4 +1,4 @@
-FROM us-central1-docker.pkg.dev/vtal-sandbox-mystic/smartcode-ai/dev.agent-base:latest
+FROM southamerica-east1-docker.pkg.dev/vtal-sandbox-mystic/smartcode-ai/dev.agent-base:latest
 
 COPY . .
 
